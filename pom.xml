@@ -15,7 +15,7 @@
     <artifactId>ecommerce-backend</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>ecommerce-backend</name>
-    <description>Impact E-Commerce: backend (Anul 2), template de pornire</description>
+    <description>Impact E-Commerce — backend de referință (Anul 2)</description>
 
     <properties>
         <java.version>17</java.version>
@@ -23,45 +23,55 @@
     </properties>
 
     <dependencies>
-        <!-- ============ Lecția 1: active de la început ============ -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-validation</artifactId>
-        </dependency>
-        <!-- Documentația API: http://localhost:8080/swagger-ui.html -->
-        <dependency>
-            <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-            <version>2.6.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- ============ Lecția 2: PostgreSQL + JPA + securitate JWT ============
-             Decomentați blocul de mai jos când ajungeți la Lecția 2, apoi
-             Maven → Reload. ATENȚIE: de aici aplicația are nevoie de baza de date
-             pornită (docker compose up), altfel nu pornește.
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+
+        <!-- Lecția 11: awareness OAuth2/login social — starter prezent, dar
+             .oauth2Login() NU e activat în SecurityConfig (vezi comentariul de
+             acolo). Fără nicio proprietate spring.security.oauth2.client.registration.*
+             setată, Spring Boot nu înregistrează niciun client și pornirea
+             aplicației e neschimbată — starter-ul e sigur de adăugat chiar și
+             fără credențiale reale. -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-oauth2-client</artifactId>
+        </dependency>
+
+        <!-- Lecția 3: cache Redis -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>2.6.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-api</artifactId>
@@ -79,28 +89,17 @@
             <version>${jjwt.version}</version>
             <scope>runtime</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
         </dependency>
-        -->
-
-        <!-- ============ Lecția 3: cache Redis ============
-             Decomentați la Lecția 3 (Redis pornește tot din docker compose).
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-cache</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
-        </dependency>
-        -->
-
-        <!-- ============ Lecția 8: teste (H2, Testcontainers, REST Assured) ============
-
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
@@ -127,15 +126,6 @@
             <version>5.5.0</version>
             <scope>test</scope>
         </dependency>
-        -->
-
-        <!-- ============ Lecția 11: OAuth2 / login social ============
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-oauth2-client</artifactId>
-        </dependency>
-        -->
     </dependencies>
 
     <build>
